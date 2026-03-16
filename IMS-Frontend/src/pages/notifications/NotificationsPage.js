@@ -66,7 +66,7 @@ export default function NotificationsPage() {
         </>}
       />
 
-      {/* Filter tabs */}
+      {}
       <div style={{ display:'flex', gap:6, marginBottom:16 }}>
         {[['all','All'],['unread',`Unread (${unreadCnt})`]].map(([v,l]) => (
           <button key={v} className={`btn btn-sm ${filter===v?'btn-primary':'btn-secondary'}`}

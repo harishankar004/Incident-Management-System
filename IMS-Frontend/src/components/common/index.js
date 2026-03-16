@@ -1,37 +1,36 @@
 import React, { useState } from 'react';
 import { initials, avatarBg, fmtAgo, STATUS_LABEL, STATUS_DOT } from '../../utils/helpers';
 
-/* ── Avatar ── */
 export function Avatar({ name, size='' }) {
   return <div className={`avatar ${size}`} style={{background:avatarBg(name)}}>{initials(name)}</div>;
 }
 
-/* ── Status Badge ── */
+
 export function StatusBadge({ status }) {
   return <span className={`badge s-${status}`}>{STATUS_LABEL[status]||status}</span>;
 }
 
-/* ── Priority Badge ── */
+
 export function PriorityBadge({ priority }) {
   const icons={LOW:'🟢',MEDIUM:'🟡',HIGH:'🟠',CRITICAL:'🔴'};
   return <span className={`badge p-${priority}`}>{icons[priority]} {priority}</span>;
 }
 
-/* ── Role Badge ── */
+
 export function RoleBadge({ role }) {
   const labels={ADMIN:'Admin',REPORTER:'End User',RESOLVER:'Support Eng.',INC_MANAGER:'Inc. Manager'};
   return <span className={`badge r-${role}`}>{labels[role]||role}</span>;
 }
 
-/* ── Spinner ── */
+
 export function Spinner({ size='' }) { return <div className={`spinner ${size}`} />; }
 
-/* ── Page Loader ── */
+
 export function PageLoader({ text='Loading...' }) {
   return <div className="page-loader"><div className="spinner spinner-lg"/><span>{text}</span></div>;
 }
 
-/* ── Empty State ── */
+
 export function EmptyState({ icon='📭', title, sub, action }) {
   return (
     <div className="empty-state">
@@ -43,7 +42,7 @@ export function EmptyState({ icon='📭', title, sub, action }) {
   );
 }
 
-/* ── Alert ── */
+
 export function Alert({ type='info', children, onClose }) {
   const icons={danger:'⚠️',success:'✅',warning:'⚠️',info:'ℹ️'};
   return (
@@ -55,7 +54,7 @@ export function Alert({ type='info', children, onClose }) {
   );
 }
 
-/* ── Modal ── */
+
 export function Modal({ open, onClose, title, children, footer, size='' }) {
   if (!open) return null;
   return (
@@ -72,7 +71,6 @@ export function Modal({ open, onClose, title, children, footer, size='' }) {
   );
 }
 
-/* ── Confirm Dialog ── */
 export function ConfirmDialog({ open, onClose, onConfirm, title, message, confirmLabel='Confirm', variant='danger', loading }) {
   return (
     <Modal open={open} onClose={onClose} title={title}
@@ -87,7 +85,7 @@ export function ConfirmDialog({ open, onClose, onConfirm, title, message, confir
   );
 }
 
-/* ── KPI Card ── */
+
 export function KpiCard({ label, value, icon, color='var(--primary)', sub, onClick }) {
   return (
     <div className="kpi-card" style={{cursor:onClick?'pointer':'default'}} onClick={onClick}>
@@ -100,7 +98,7 @@ export function KpiCard({ label, value, icon, color='var(--primary)', sub, onCli
   );
 }
 
-/* ── Toast ── */
+
 export function useToast() {
   const [toasts, set] = useState([]);
   const push = (msg, type='success') => {
@@ -124,7 +122,7 @@ export function ToastStack({ toasts }) {
   );
 }
 
-/* ── Pagination ── */
+
 export function Pagination({ page, total, totalPages, size=20, onPage }) {
   if (totalPages<=1) return null;
   const from = page*size+1, to = Math.min((page+1)*size, total);
@@ -144,7 +142,7 @@ export function Pagination({ page, total, totalPages, size=20, onPage }) {
   );
 }
 
-/* ── Detail Field ── */
+
 export function DF({ label, value, mono }) {
   return (
     <div className="detail-field">
@@ -154,7 +152,7 @@ export function DF({ label, value, mono }) {
   );
 }
 
-/* ── Timeline Item ── */
+
 export function TLItem({ status, changedByName, changeNote, changedAt }) {
   const statusLabels = {
     NEW:'Incident Raised', LOGGED:'Logged & Validated',
@@ -172,7 +170,6 @@ export function TLItem({ status, changedByName, changeNote, changedAt }) {
   );
 }
 
-/* ── Comment ── */
 export function CommentBubble({ c }) {
   return (
     <div className={`comment-wrap ${c.isInternal?'comment-internal':''}`}>
@@ -189,7 +186,7 @@ export function CommentBubble({ c }) {
   );
 }
 
-/* ── Bell ── */
+
 export function Bell({ count, onClick }) {
   return (
     <button className="bell-btn" onClick={onClick}>
@@ -201,7 +198,6 @@ export function Bell({ count, onClick }) {
   );
 }
 
-/* ── Section header helper ── */
 export function PageHeader({ title, sub, actions }) {
   return (
     <div className="page-header">

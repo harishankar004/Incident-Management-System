@@ -5,14 +5,14 @@ const http = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
-// Attach JWT token to every request
+
 http.interceptors.request.use(cfg => {
   const t = localStorage.getItem('ims_token');
   if (t) cfg.headers.Authorization = `Bearer ${t}`;
   return cfg;
 });
 
-// Handle 401 → redirect to login
+
 http.interceptors.response.use(
   r => r,
   e => {
@@ -53,8 +53,6 @@ export const adminAPI = {
 };
 
 export const usersAPI = {
-  // This endpoint is accessible to all authenticated users (not admin-restricted)
-  // INC_MANAGER uses this to fetch RESOLVER list for incident assignment
   byRole: role => http.get(`/api/users/by-role/${role}`),
 };
 

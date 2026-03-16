@@ -24,7 +24,7 @@ public class Role {
     private String roleName;
 
     @Column(name = "role_type", nullable = false, length = 50)
-    private String roleType; // ADMIN | OPERATIONAL | READ_ONLY
+    private String roleType; 
 
     @Column(name = "description", length = 500)
     private String description;

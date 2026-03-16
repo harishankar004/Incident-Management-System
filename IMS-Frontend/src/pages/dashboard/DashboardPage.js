@@ -61,7 +61,7 @@ export default function DashboardPage() {
 
   return (
     <div className="anim-in">
-      {/* Welcome Banner */}
+      {}
       <div style={{
         background: 'linear-gradient(135deg,#1e40af 0%,#2563eb 50%,#1d4ed8 100%)',
         borderRadius: 'var(--r-lg)', padding:'28px 32px', marginBottom:24,
@@ -76,7 +76,7 @@ export default function DashboardPage() {
           {roleDesc[user?.roleCode] || ''}
         </p>
         <div style={{ marginTop:16, display:'flex', gap:10 }}>
-          {/* REPORTER: view my incidents + raise new */}
+          {}
           {isReporter && <>
             <button className="btn btn-sm"
               style={{ background:'rgba(255,255,255,.15)', color:'#fff', border:'1px solid rgba(255,255,255,.2)' }}
@@ -89,7 +89,7 @@ export default function DashboardPage() {
               ➕ Raise Incident
             </button>
           </>}
-          {/* RESOLVER: view all incidents + assigned to me */}
+          {}
           {isResolver && <>
             <button className="btn btn-sm"
               style={{ background:'rgba(255,255,255,.15)', color:'#fff', border:'1px solid rgba(255,255,255,.2)' }}
@@ -102,7 +102,7 @@ export default function DashboardPage() {
               🔧 Assigned to Me
             </button>
           </>}
-          {/* INC_MANAGER: view queue + SLA monitor — NO create button */}
+          {}
           {isManager && <>
             <button className="btn btn-sm"
               style={{ background:'rgba(255,255,255,.15)', color:'#fff', border:'1px solid rgba(255,255,255,.2)' }}
@@ -118,7 +118,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* KPI Grid */}
+      {}
       <div className="kpi-grid">
         <KpiCard label="Total Incidents"  value={kpi?.totalIncidents}       icon="📋" color="#2563eb" />
         <KpiCard label="Open"             value={kpi?.openIncidents}        icon="🔓" color="#d97706" sub="New + Logged + Categorized" />
@@ -133,7 +133,7 @@ export default function DashboardPage() {
         }
       </div>
 
-      {/* Charts */}
+      {}
       <div className="grid-2" style={{ marginBottom:20 }}>
         <div className="card">
           <div className="card-header">
@@ -185,7 +185,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* Recent Incidents */}
+      {}
       <div className="card">
         <div className="card-header">
           <div>

@@ -60,7 +60,6 @@ export default function UserManagementPage() {
     setFormErr(''); setFieldErrs({}); setShowEdit(true);
   };
 
-  // ── Validate all create fields — ALL are mandatory ──
   const validateCreate = () => {
     const e = {};
     if (!cf.username.trim())   e.username   = 'Username is required';
@@ -230,7 +229,7 @@ export default function UserManagementPage() {
         )}
       </div>
 
-      {/* ── Create User Modal — ALL FIELDS MANDATORY ── */}
+      {}
       <Modal open={showCreate} onClose={() => setShowCreate(false)} title="➕ Create New User" size="modal-lg"
         footer={<>
           <button className="btn btn-secondary btn-sm" onClick={() => setShowCreate(false)}>Cancel</button>
@@ -241,7 +240,7 @@ export default function UserManagementPage() {
 
         {formErr && <Alert type="danger">{formErr}</Alert>}
 
-        {/* Section A */}
+        {}
         <div className="section-label">Section A — Basic Information (All fields required)</div>
         <div className="form-row">
           <div className="form-group">
@@ -282,7 +281,7 @@ export default function UserManagementPage() {
 
         <hr className="divider" />
 
-        {/* Section B */}
+        {}
         <div className="section-label">Section B — Organization Details (All fields required)</div>
         <div className="form-row">
           <div className="form-group">
@@ -303,7 +302,7 @@ export default function UserManagementPage() {
 
         <hr className="divider" />
 
-        {/* Section C */}
+        {}
         <div className="section-label">Section C — Role Assignment</div>
         <div className="form-group">
           <label className="form-label">Role <span className="req">*</span></label>
@@ -319,7 +318,7 @@ export default function UserManagementPage() {
         </div>
       </Modal>
 
-      {/* ── Edit User Modal ── */}
+      {}
       <Modal open={showEdit} onClose={() => setShowEdit(false)} title="✏️ Edit User"
         footer={<>
           <button className="btn btn-secondary btn-sm" onClick={() => setShowEdit(false)}>Cancel</button>
@@ -378,7 +377,7 @@ export default function UserManagementPage() {
         )}
       </Modal>
 
-      {/* ── Deactivate Confirm ── */}
+      {}
       <ConfirmDialog
         open={showDeact} onClose={() => setShowDeact(false)}
         onConfirm={handleDeactivate} loading={saving}

@@ -55,7 +55,7 @@ export default function IncidentListPage({ myOnly = false }) {
         sub={subtitle}
         actions={<>
           <button className="btn btn-secondary btn-sm" onClick={() => fetchData(page)}>↻ Refresh</button>
-          {/* Only REPORTER gets the Raise Incident button */}
+          {}
           {isReporter && (
             <button className="btn btn-primary" onClick={() => navigate('/app/incidents/new')}>
               ➕ Raise Incident
@@ -65,7 +65,7 @@ export default function IncidentListPage({ myOnly = false }) {
       />
 
       <div className="card">
-        {/* Filter bar */}
+        {}
         <div className="filter-bar">
           <div className="search-wrap" style={{ flex:1, minWidth:180 }}>
             <span className="search-icon">🔍</span>
@@ -96,7 +96,7 @@ export default function IncidentListPage({ myOnly = false }) {
           </span>
         </div>
 
-        {/* Table */}
+        {}
         {loading ? <PageLoader /> : rows.length === 0 ? (
           <EmptyState icon="📭" title="No incidents found"
             sub={hasFilters ? 'Try different filters or clear them.' : 'No incidents yet.'}

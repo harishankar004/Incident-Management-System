@@ -33,14 +33,11 @@ public class IncidentService {
     private final UserRepository            userRepo;
     private final NotificationRepository    notifRepo;
 
-    // ── REPORTER ONLY: Create incident ───────────────────────
-    // Per ITIL design: only Reporters raise incidents.
-    // INC_MANAGER/RESOLVER/ADMIN are NOT allowed to create incidents.
+    
     public IncidentResponse createIncident(CreateIncidentRequest req, Long creatorId) {
         User creator = userRepo.findById(creatorId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
-        // Enforce: only REPORTER role can create incidents
         validateRole(creator, Set.of(RoleCode.REPORTER),
                 "Only End Users (Reporters) can raise incidents. Managers and Resolvers do not create incidents.");
 
@@ -71,7 +68,6 @@ public class IncidentService {
         return toResponse(incident);
     }
 
-    // ── ALL ROLES: Search / list incidents ───────────────────
     @Transactional(readOnly = true)
     public PageResponse<IncidentSummaryResponse> getIncidents(
             IncidentStatus status, IncidentPriority priority,
@@ -81,7 +77,6 @@ public class IncidentService {
         return toPage(pg);
     }
 
-    // ── REPORTER: View own incidents only ─────────────────────
     @Transactional(readOnly = true)
     public PageResponse<IncidentSummaryResponse> getMyIncidents(Long userId, int page, int size) {
         Page<Incident> pg = incidentRepo.findByCreatedById(userId,
@@ -89,13 +84,11 @@ public class IncidentService {
         return toPage(pg);
     }
 
-    // ── ALL ROLES: View single incident ──────────────────────
     @Transactional(readOnly = true)
     public IncidentResponse getIncidentById(Long id) {
         return toResponse(findIncident(id));
     }
 
-    // ── INC_MANAGER: Assign incident to a RESOLVER ───────────
     public IncidentResponse assignIncident(Long id, AssignIncidentRequest req, Long actorId) {
         Incident inc = findIncident(id);
         User actor   = findUser(actorId);
@@ -118,16 +111,13 @@ public class IncidentService {
         return toResponse(inc);
     }
 
-    // ── INC_MANAGER / RESOLVER: Change incident status ───────
-    //   INC_MANAGER: NEW→LOGGED, LOGGED→CATEGORIZED, *→ESCALATED, RESOLVED→CLOSED, CLOSED→REOPENED
-    //   RESOLVER:    ASSIGNED→IN_PROGRESS, IN_PROGRESS→RESOLVED
+   
     public IncidentResponse changeStatus(Long id, StatusChangeRequest req, Long actorId) {
         Incident inc  = findIncident(id);
         User actor    = findUser(actorId);
         IncidentStatus newStatus = req.getNewStatus();
         IncidentStatus old       = inc.getStatus();
 
-        // ── Role-based status transition validation ─────────────────
         switch (newStatus) {
             case LOGGED -> validateRole(actor, Set.of(RoleCode.INC_MANAGER, RoleCode.ADMIN),
                     "Only Incident Managers can log incidents");
@@ -162,7 +152,6 @@ public class IncidentService {
         return toResponse(inc);
     }
 
-    // ── ALL ROLES: Add comment / work note ───────────────────
     public CommentResponse addComment(Long incidentId, AddCommentRequest req, Long userId) {
         Incident inc      = findIncident(incidentId);
         User commenter    = findUser(userId);
@@ -185,7 +174,6 @@ public class IncidentService {
                 .commentedAt(comment.getCommentedAt()).build();
     }
 
-    // ── Dashboard KPIs ────────────────────────────────────────
     @Transactional(readOnly = true)
     public DashboardKpiResponse getDashboardKpis(Long userId) {
         return DashboardKpiResponse.builder()
@@ -205,7 +193,6 @@ public class IncidentService {
                 .build();
     }
 
-    // ── Private helpers ───────────────────────────────────────
     private Incident findIncident(Long id) {
         return incidentRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Incident not found: " + id));

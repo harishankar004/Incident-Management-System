@@ -17,13 +17,9 @@ export default function IncidentDetailPage() {
 
   const [inc,     setInc]  = useState(null);
   const [loading, setLoad] = useState(true);
-
-  // comment state
   const [comment,    setComment] = useState('');
   const [isInternal, setIsInt]   = useState(false);
   const [posting,    setPosting] = useState(false);
-
-  // assign modal
   const [showAssign,  setSA]  = useState(false);
   const [resolvers,   setRes] = useState([]);
   const [resLoading,  setRL]  = useState(false);
@@ -31,8 +27,6 @@ export default function IncidentDetailPage() {
   const [assignNote,  setAN]  = useState('');
   const [assignGroup, setAG]  = useState('');
   const [assignBusy,  setAB]  = useState(false);
-
-  // status modal
   const [showStatus, setSS]  = useState(false);
   const [newStatus,  setNS]  = useState('');
   const [statusNote, setSN]  = useState('');
@@ -55,7 +49,6 @@ export default function IncidentDetailPage() {
     setRes([]);
     setAO('');
     try {
-      // Uses /api/users/by-role/RESOLVER — accessible to INC_MANAGER (not admin-restricted)
       const r = await usersAPI.byRole('RESOLVER');
       const resolverList = r.data.data || [];
       setRes(resolverList);
@@ -114,19 +107,14 @@ export default function IncidentDetailPage() {
     finally { setPosting(false); }
   };
 
-  // Which statuses each role can set — based on current incident status
   const allowedStatuses = () => {
     if (isManager || isAdmin) {
       const s = inc?.status;
-      // When CLOSED, manager can REOPEN — this is the key transition
       if (s === 'CLOSED') return ['REOPENED'];
-      // When RESOLVED, manager can CLOSE (approve) or REOPEN (reject)
       if (s === 'RESOLVED') return ['CLOSED', 'REOPENED'];
-      // All other active states
       return ['LOGGED', 'CATEGORIZED', 'ESCALATED', 'CLOSED', 'REOPENED'];
     }
     if (isResolver) {
-      // Resolver can only move to IN_PROGRESS or RESOLVED when assigned/in-progress
       const s = inc?.status;
       if (s === 'ASSIGNED')    return ['IN_PROGRESS'];
       if (s === 'IN_PROGRESS') return ['RESOLVED'];
@@ -140,7 +128,6 @@ export default function IncidentDetailPage() {
   if (!inc)    return <div style={{ padding:40, textAlign:'center', color:'var(--text-m)' }}>Incident not found.</div>;
 
   const canAssign = (isManager || isAdmin) && !['CLOSED', 'REOPENED'].includes(inc.status);
-  // IMPORTANT: canStatus must NOT block CLOSED status for manager — they need to REOPEN from CLOSED
   const canStatus = (isResolver || isManager || isAdmin) && allowedStatuses().length > 0;
 
   return (
@@ -157,7 +144,7 @@ export default function IncidentDetailPage() {
         <button className="btn btn-ghost btn-sm" onClick={() => navigate(-1)}>← Back</button>
       </div>
 
-      {/* ── Header ── */}
+      {}
       <div className="page-header">
         <div style={{ flex:1, minWidth:0 }}>
           <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:10, flexWrap:'wrap' }}>
@@ -187,11 +174,11 @@ export default function IncidentDetailPage() {
         </div>
       </div>
 
-      {/* ── Body ── */}
+      {}
       <div className="grid-sidebar-lg" style={{ gap:20 }}>
-        {/* Left: main content */}
+        {}
         <div style={{ display:'flex', flexDirection:'column', gap:18 }}>
-          {/* Description */}
+          {}
           <div className="card">
             <div className="card-header"><div className="card-title">📄 Description</div></div>
             <div className="card-body" style={{ whiteSpace:'pre-wrap', lineHeight:1.8, color:'var(--text-s)', fontSize:14 }}>
@@ -199,7 +186,7 @@ export default function IncidentDetailPage() {
             </div>
           </div>
 
-          {/* Resolution notes */}
+          {}
           {inc.resolutionNotes && (
             <div className="card" style={{ borderColor:'#86efac' }}>
               <div className="card-header" style={{ background:'var(--green-50)', borderRadius:'var(--r) var(--r) 0 0' }}>
@@ -216,7 +203,7 @@ export default function IncidentDetailPage() {
             </div>
           )}
 
-          {/* Timeline */}
+          {}
           <div className="card">
             <div className="card-header">
               <div className="card-title">📜 Activity Timeline</div>
@@ -233,7 +220,7 @@ export default function IncidentDetailPage() {
             </div>
           </div>
 
-          {/* Comments */}
+          {}
           <div className="card">
             <div className="card-header">
               <div className="card-title">💬 Comments & Work Notes</div>
@@ -274,7 +261,7 @@ export default function IncidentDetailPage() {
           </div>
         </div>
 
-        {/* Right: sidebar details */}
+        {}
         <div style={{ display:'flex', flexDirection:'column', gap:14 }}>
           <div className="card">
             <div className="card-header"><div className="card-title">ℹ️ Incident Details</div></div>
@@ -323,7 +310,7 @@ export default function IncidentDetailPage() {
         </div>
       </div>
 
-      {/* ── Assign Modal ── */}
+      {}
       <Modal open={showAssign} onClose={() => setSA(false)} title="👤 Assign Incident to Resolver" size="modal-md"
         footer={<>
           <button className="btn btn-secondary btn-sm" onClick={() => setSA(false)}>Cancel</button>
@@ -366,7 +353,7 @@ export default function IncidentDetailPage() {
         </div>
       </Modal>
 
-      {/* ── Status Change Modal ── */}
+      { }
       <Modal open={showStatus} onClose={() => setSS(false)} title="⚡ Change Incident Status" size="modal-md"
         footer={<>
           <button className="btn btn-secondary btn-sm" onClick={() => setSS(false)}>Cancel</button>

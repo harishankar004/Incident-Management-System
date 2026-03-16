@@ -66,7 +66,6 @@ public class AdminUserController {
         return ResponseEntity.ok(ApiResponse.ok(userService.getUsersByRole(roleCode)));
     }
 
-    // SLA management
     @GetMapping("/slas")
     public ResponseEntity<ApiResponse<List<SlaResponse>>> listSlas() {
         return ResponseEntity.ok(ApiResponse.ok(slaService.getAllSlas()));
@@ -89,7 +88,6 @@ public class AdminUserController {
         return ResponseEntity.ok(ApiResponse.ok("SLA deactivated", null));
     }
 
-    // Audit logs
     @GetMapping("/audit")
     public ResponseEntity<ApiResponse<PageResponse<AuditLogResponse>>> audit(
             @RequestParam(defaultValue = "0") int page,

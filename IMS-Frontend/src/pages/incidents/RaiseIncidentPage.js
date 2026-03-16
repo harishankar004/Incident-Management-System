@@ -72,7 +72,7 @@ export default function RaiseIncidentPage() {
       {error && <Alert type="danger" onClose={() => setError('')}>{error}</Alert>}
 
       <form onSubmit={handleSubmit}>
-        {/* Details */}
+        {}
         <div className="card" style={{ marginBottom: 16 }}>
           <div className="card-header">
             <div className="card-title">📄 Incident Details</div>
@@ -99,14 +99,14 @@ export default function RaiseIncidentPage() {
           </div>
         </div>
 
-        {/* Classification */}
+        {}
         <div className="card" style={{ marginBottom: 16 }}>
           <div className="card-header">
             <div className="card-title">⚙️ Classification</div>
           </div>
           <div className="card-body">
             <div className="form-row">
-              {/* Priority */}
+              {}
               <div className="form-group">
                 <label className="form-label">Priority <span className="req">*</span></label>
                 <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:8 }}>
@@ -132,7 +132,7 @@ export default function RaiseIncidentPage() {
                 </div>
               </div>
 
-              {/* Category */}
+              {}
               <div className="form-group">
                 <label className="form-label">Category</label>
                 <select className="form-select" value={form.categoryId}
@@ -142,7 +142,7 @@ export default function RaiseIncidentPage() {
                 </select>
                 <p className="form-hint">Helps route to the correct team faster</p>
 
-                {/* SLA Preview */}
+                {}
                 {form.priority && (
                   <div style={{
                     marginTop: 16, padding:'12px 14px', borderRadius:'var(--r-sm)',

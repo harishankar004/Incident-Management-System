@@ -39,7 +39,6 @@ public class DataSeeder implements CommandLineRunner {
         log.info("✅ IMS Data seeding complete");
     }
 
-    // ── Permissions ──────────────────────────────────────────
     private void seedPermissions() {
         String[][] perms = {
             {"INCIDENT_CREATE",    "INCIDENT","CREATE", "Raise a new incident"},
@@ -69,7 +68,6 @@ public class DataSeeder implements CommandLineRunner {
         }
     }
 
-    // ── Roles ────────────────────────────────────────────────
     private void seedRoles() {
         Object[][] roleDefs = {
             {RoleCode.ADMIN,       "System Administrator",    "ADMIN",       "Full governance, no incident ops"},
@@ -108,7 +106,6 @@ public class DataSeeder implements CommandLineRunner {
         }
     }
 
-    // ── Default admin user ───────────────────────────────────
     private void seedAdmin() {
         if (userRepo.findByUsername("admin").isEmpty()) {
             User admin = User.builder()
@@ -131,7 +128,6 @@ public class DataSeeder implements CommandLineRunner {
         }
     }
 
-    // ── Categories ───────────────────────────────────────────
     private void seedCategories() {
         if (categoryRepo.count() == 0) {
             String[] cats = {
@@ -146,7 +142,6 @@ public class DataSeeder implements CommandLineRunner {
         }
     }
 
-    // ── SLAs ─────────────────────────────────────────────────
     private void seedSlas() {
         if (slaRepo.count() == 0) {
             Object[][] slas = {

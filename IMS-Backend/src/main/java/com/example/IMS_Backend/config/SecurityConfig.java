@@ -35,20 +35,14 @@ public class SecurityConfig {
             .cors(c -> c.configurationSource(corsSource()))
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                // Public — login only
                 .requestMatchers("/api/auth/**").permitAll()
 
-                // Admin only — user management, SLA config, audit logs
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
 
-                // INC_MANAGER — all incident operations
-                //   (log, categorize, assign, escalate, close, reopen, SLA monitoring)
                 .requestMatchers("/api/manager/**").hasAnyRole("INC_MANAGER", "ADMIN")
 
-                // RESOLVER (L2/L3) — work on & resolve assigned incidents
                 .requestMatchers("/api/resolver/**").hasAnyRole("RESOLVER", "INC_MANAGER", "ADMIN")
 
-                // All authenticated users — shared incident & notification endpoints
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)

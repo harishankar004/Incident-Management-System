@@ -51,7 +51,7 @@ export default function AppLayout() {
 
   return (
     <div className="app-shell">
-      {/* ─── Sidebar ─── */}
+      {}
       <aside className="sidebar">
         <div className="sb-logo">
           <div className="sb-logo-mark">IMS</div>
@@ -63,7 +63,7 @@ export default function AppLayout() {
 
         <div className="sb-role">{roleLabel[user?.roleCode] || user?.roleCode}</div>
 
-        {/* ── ADMIN: governance only, no incident operations ── */}
+        {}
         {isAdmin && <>
           <div className="nav-group">
             <div className="nav-group-label">Overview</div>
@@ -77,7 +77,7 @@ export default function AppLayout() {
           </div>
         </>}
 
-        {/* ── REPORTER: raise & track own incidents only ── */}
+        {}
         {isReporter && <>
           <div className="nav-group">
             <div className="nav-group-label">My Work</div>
@@ -87,7 +87,7 @@ export default function AppLayout() {
           </div>
         </>}
 
-        {/* ── RESOLVER: investigate & resolve assigned incidents ── */}
+        {}
         {isResolver && <>
           <div className="nav-group">
             <div className="nav-group-label">My Work</div>
@@ -97,13 +97,13 @@ export default function AppLayout() {
           </div>
         </>}
 
-        {/* ── INC_MANAGER: monitor, assign, escalate — NO create ── */}
+        {}
         {isManager && <>
           <div className="nav-group">
             <div className="nav-group-label">Operations</div>
             <NavItem to="/app/dashboard"  icon="🏠" label="Dashboard" end />
             <NavItem to="/app/incidents"  icon="📋" label="Incident Queue" />
-            {/* NOTE: INC_MANAGER does NOT create incidents — Reporters do */}
+            {}
           </div>
           <div className="nav-group">
             <div className="nav-group-label">Monitoring</div>
@@ -112,7 +112,7 @@ export default function AppLayout() {
           </div>
         </>}
 
-        {/* ── Shared: notifications for all roles ── */}
+        {}
         <div className="nav-group">
           <NavItem to="/app/notifications" icon="🔔" label="Notifications" badge={unread} />
         </div>
@@ -128,7 +128,7 @@ export default function AppLayout() {
         </div>
       </aside>
 
-      {/* ─── Main Area ─── */}
+      {}
       <div className="main-area">
         <header className="topbar">
           <div style={{ display:'flex', alignItems:'center', gap:10 }}>
@@ -146,7 +146,7 @@ export default function AppLayout() {
           </div>
         </header>
 
-        {/* Notification dropdown */}
+        {}
         {showNotif && (
           <div className="notif-dropdown">
             <div style={{ padding:'12px 16px', borderBottom:'1px solid var(--border-subtle)', display:'flex', alignItems:'center', justifyContent:'space-between' }}>

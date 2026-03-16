@@ -34,7 +34,6 @@ public class AuthService {
         if (!passwordEncoder.matches(req.getPassword(), user.getPasswordHash()))
             throw new UnauthorizedException("Invalid username or password");
 
-        // Get active role assignment
         UserRoleAssignment activeAssignment = user.getRoleAssignments().stream()
                 .filter(ra -> ra.getEffectiveTo() == null
                         || ra.getEffectiveTo().isAfter(LocalDateTime.now()))
@@ -44,7 +43,6 @@ public class AuthService {
         RoleCode roleCode = activeAssignment.getRole().getRoleCode();
         String   roleName = activeAssignment.getRole().getRoleName();
 
-        // Update last login timestamp
         user.setLastLoginAt(LocalDateTime.now());
         userRepo.save(user);
 

@@ -37,7 +37,7 @@ export default function LoginPage() {
 
   return (
     <div className="login-shell">
-      {/* ── LEFT PANEL ── */}
+      { }
       <div className="login-panel-left">
         <div className="login-left-content">
           <div style={{ display:'flex', alignItems:'center', gap:14, marginBottom:48 }}>
@@ -68,7 +68,7 @@ export default function LoginPage() {
         </div>
       </div>
 
-      {/* ── RIGHT PANEL (Login Form) ── */}
+      { }
       <div className="login-panel-right">
         <div style={{ width:'100%', maxWidth:360 }}>
           <h2 style={{ fontSize:26, fontWeight:800, letterSpacing:'-.5px', marginBottom:6 }}>
@@ -78,7 +78,7 @@ export default function LoginPage() {
             Sign in to your IMS account
           </p>
 
-          {/* ── Error Banner — stays visible until user re-submits ── */}
+          {}
           {error && (
             <div style={{
               display:'flex', alignItems:'flex-start', gap:10,
@@ -149,7 +149,7 @@ export default function LoginPage() {
             </button>
           </form>
 
-          {/* Contact admin note */}
+          {}
           <p style={{ marginTop:20, fontSize:12, color:'var(--text-m)', textAlign:'center', lineHeight:1.6 }}>
             Don't have an account?<br />
             Contact your <strong style={{ color:'var(--text-s)' }}>System Administrator</strong> to create one.

@@ -19,7 +19,7 @@ export function AuthProvider({ children }) {
       setUser(u);
       return u;
     } catch (err) {
-      // Re-throw so LoginPage can display the error
+       
       throw err;
     } finally {
       setLoading(false);

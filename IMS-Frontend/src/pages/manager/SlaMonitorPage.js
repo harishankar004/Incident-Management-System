@@ -63,7 +63,7 @@ export default function SlaMonitorPage() {
         actions={<button className="btn btn-secondary btn-sm" onClick={() => window.location.reload()}>↻ Refresh</button>}
       />
 
-      {/* KPI row */}
+      {}
       <div className="kpi-grid">
         <KpiCard label="Active Incidents"   value={activeCount}          icon="📋" color="var(--primary)" />
         <KpiCard label="SLA Breaches"        value={breachCount}          icon="🚨" color="#dc2626" sub="Requires immediate action" />
@@ -71,7 +71,7 @@ export default function SlaMonitorPage() {
         <KpiCard label="Global Breaches"     value={kpi?.slaBreaches}     icon="⚠️" color="#d97706" sub="All-time" />
       </div>
 
-      {/* Priority heatmap */}
+      {}
       <div className="card" style={{ marginBottom: 20 }}>
         <div className="card-header">
           <div className="card-title">🌡️ SLA Heatmap by Priority</div>
@@ -113,7 +113,7 @@ export default function SlaMonitorPage() {
         </div>
       </div>
 
-      {/* Incident table */}
+      {}
       <div className="card">
         <div className="card-header">
           <div>
